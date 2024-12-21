@@ -24,7 +24,6 @@ namespace Lab_2
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern bool ReleaseCapture();
 
-        // Конструктор формы
         public Form1()
         {
             InitializeComponent(); // Инициализация компонентов формы
@@ -32,8 +31,7 @@ namespace Lab_2
             _graphManager.Initialize(); // Инициализация графического менеджера
             _validator = new InputValidator(); // Создание валидатора входных данных
         }
-
-        // Обработчик кнопки "Рассчитать" для построения графика
+        
         private async void buttonras_Click(object sender, EventArgs e)
         {
             if (!_validator.Validate(textBox2.Text, textBox3.Text))
@@ -62,32 +60,26 @@ namespace Lab_2
             }
         }
 
-        // Обработчик пункта меню "Очистить"
         private async void очиститьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var command = new ClearGraphCommand(_graphManager);
             await command.Execute();
         }
 
-        // Ограничение ввода символов в текстовое поле для функции
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Запрещает ввод точки (символа '.')
             if (e.KeyChar == 46) e.Handled = true;
         }
 
-        // Ограничение ввода символов в текстовое поле для нижней границы
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Разрешены только цифры, Backspace, запятая и минус
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 44 && e.KeyChar != 45)
                 e.Handled = true;
         }
-
-        // Ограничение ввода символов в текстовое поле для верхней границы
+        
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Разрешены только цифры, Backspace, запятая и минус
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 44 && e.KeyChar != 45)
                 e.Handled = true;
         }
@@ -103,10 +95,9 @@ namespace Lab_2
                 e.Handled = !char.IsDigit(e.KeyChar) && e.KeyChar != 8;
         }
 
-        // Обработчик пункта меню "Закрыть" для завершения работы приложения
         private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Close(); // Закрывает текущую форму
+            Close(); 
         }
 
         // Обработка перемещения окна мышью
