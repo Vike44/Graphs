@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aKh/hnc7Nx8=",
+  "dgSpecHash": "b+r7qJBbs3s=",
   "success": true,
-  "projectFilePath": "C:\\Users\\comp\\Desktop\\Graphs\\Lab.csproj",
+  "projectFilePath": "C:\\Users\\comp\\Source\\Repos\\Graphs1\\Lab.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\comp\\.nuget\\packages\\mathparser.org-mxparser\\6.1.0\\mathparser.org-mxparser.6.1.0.nupkg.sha512",
     "C:\\Users\\comp\\.nuget\\packages\\zedgraph\\5.1.7\\zedgraph.5.1.7.nupkg.sha512"

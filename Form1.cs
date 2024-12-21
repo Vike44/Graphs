@@ -8,7 +8,6 @@ using ZedGraph;
 
 namespace Lab_2
 {
-    // Главная форма приложения
     public partial class Form1 : Form
     {
         private readonly IGraphManager _graphManager; // Управление графиками
@@ -37,10 +36,8 @@ namespace Lab_2
         // Обработчик кнопки "Рассчитать" для построения графика
         private async void buttonras_Click(object sender, EventArgs e)
         {
-            // Проверка корректности ввода
             if (!_validator.Validate(textBox2.Text, textBox3.Text))
             {
-                // Если ввод некорректен, выводится сообщение об ошибке
                 MessageBox.Show(_validator.Error);
                 return;
             }
@@ -68,10 +65,7 @@ namespace Lab_2
         // Обработчик пункта меню "Очистить"
         private async void очиститьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Создание команды для очистки графика
             var command = new ClearGraphCommand(_graphManager);
-
-            // Асинхронное выполнение команды очистки
             await command.Execute();
         }
 
@@ -118,7 +112,6 @@ namespace Lab_2
         // Обработка перемещения окна мышью
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            // Если нажата левая кнопка мыши
             if (e.Button == MouseButtons.Left)
             {
                 ReleaseCapture(); // Освобождает захват мыши
@@ -126,10 +119,8 @@ namespace Lab_2
             }
         }
 
-        // Обработка перемещения меню мышью
         private void menuStrip1_MouseDown(object sender, MouseEventArgs e)
         {
-            // Если нажата левая кнопка мыши
             if (e.Button == MouseButtons.Left)
             {
                 ReleaseCapture(); // Освобождает захват мыши

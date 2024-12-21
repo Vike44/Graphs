@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\comp\\Desktop\\Graphs\\Lab.csproj": {}
+    "C:\\Users\\comp\\Source\\Repos\\Graphs1\\Lab.csproj": {}
   },
   "projects": {
-    "C:\\Users\\comp\\Desktop\\Graphs\\Lab.csproj": {
+    "C:\\Users\\comp\\Source\\Repos\\Graphs1\\Lab.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\comp\\Desktop\\Graphs\\Lab.csproj",
+        "projectUniqueName": "C:\\Users\\comp\\Source\\Repos\\Graphs1\\Lab.csproj",
         "projectName": "Lab",
-        "projectPath": "C:\\Users\\comp\\Desktop\\Graphs\\Lab.csproj",
+        "projectPath": "C:\\Users\\comp\\Source\\Repos\\Graphs1\\Lab.csproj",
         "packagesPath": "C:\\Users\\comp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\comp\\Desktop\\Graphs\\obj\\",
+        "outputPath": "C:\\Users\\comp\\Source\\Repos\\Graphs1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
