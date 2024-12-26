@@ -8,6 +8,7 @@ using ZedGraph;
 
 namespace Lab_2
 {
+    // Главная форма приложения
     public partial class Form1 : Form
     {
         private readonly IGraphManager _graphManager; // Управление графиками
@@ -24,6 +25,7 @@ namespace Lab_2
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern bool ReleaseCapture();
 
+        // Конструктор формы
         public Form1()
         {
             InitializeComponent(); // Инициализация компонентов формы
@@ -31,11 +33,14 @@ namespace Lab_2
             _graphManager.Initialize(); // Инициализация графического менеджера
             _validator = new InputValidator(); // Создание валидатора входных данных
         }
-        
+
+        // Обработчик кнопки "Рассчитать" для построения графика
         private async void buttonras_Click(object sender, EventArgs e)
         {
+            // Проверка корректности ввода
             if (!_validator.Validate(textBox2.Text, textBox3.Text))
             {
+                // Если ввод некорректен, выводится сообщение об ошибке
                 MessageBox.Show(_validator.Error);
                 return;
             }
@@ -60,26 +65,35 @@ namespace Lab_2
             }
         }
 
+        // Обработчик пункта меню "Очистить"
         private async void очиститьToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Создание команды для очистки графика
             var command = new ClearGraphCommand(_graphManager);
+
+            // Асинхронное выполнение команды очистки
             await command.Execute();
         }
 
+        // Ограничение ввода символов в текстовое поле для функции
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
+            // Запрещает ввод точки (символа '.')
             if (e.KeyChar == 46) e.Handled = true;
         }
 
+        // Ограничение ввода символов в текстовое поле для нижней границы
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Разрешены только цифры, Backspace, запятая и минус
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 44 && e.KeyChar != 45)
                 e.Handled = true;
         }
-        
+
+        // Ограничение ввода символов в текстовое поле для верхней границы
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
+            // Разрешены только цифры, Backspace, запятая и минус
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 44 && e.KeyChar != 45)
                 e.Handled = true;
         }
@@ -95,14 +109,16 @@ namespace Lab_2
                 e.Handled = !char.IsDigit(e.KeyChar) && e.KeyChar != 8;
         }
 
+        // Обработчик пункта меню "Закрыть" для завершения работы приложения
         private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Close(); 
+            Close(); // Закрывает текущую форму
         }
 
         // Обработка перемещения окна мышью
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
+            // Если нажата левая кнопка мыши
             if (e.Button == MouseButtons.Left)
             {
                 ReleaseCapture(); // Освобождает захват мыши
@@ -110,8 +126,10 @@ namespace Lab_2
             }
         }
 
+        // Обработка перемещения меню мышью
         private void menuStrip1_MouseDown(object sender, MouseEventArgs e)
         {
+            // Если нажата левая кнопка мыши
             if (e.Button == MouseButtons.Left)
             {
                 ReleaseCapture(); // Освобождает захват мыши
