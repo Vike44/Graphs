@@ -27,7 +27,7 @@ namespace Lab_2
         public Form1()
         {
             InitializeComponent(); // Инициализация компонентов формы
-            _graphManager = Singleton.GetInstance(zedGraphControl1); // Получение объекта управления графиками через Singleton
+            _graphManager = ZedGraphManager.GetInstance(zedGraphControl1); // Получение объекта управления графиками через ZedGraphManager
             _graphManager.Initialize(); // Инициализация графического менеджера
             _validator = new InputValidator(); // Создание валидатора входных данных
         }
