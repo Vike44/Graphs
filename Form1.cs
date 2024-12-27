@@ -1,10 +1,8 @@
-﻿using org.mariuszgromada.math.mxparser;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System;
+using System.Net.Sockets;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ZedGraph;
 
 namespace Lab_2
 {
@@ -27,7 +25,7 @@ namespace Lab_2
         public Form1()
         {
             InitializeComponent(); // Инициализация компонентов формы
-            _graphManager = Singleton.GetInstance(zedGraphControl1); // Получение объекта управления графиками через Singleton
+            _graphManager = ZedGraphManager.GetInstance(zedGraphControl1); // Получение объекта управления графиками через ZedGraphManager
             _graphManager.Initialize(); // Инициализация графического менеджера
             _validator = new InputValidator(); // Создание валидатора входных данных
         }
@@ -42,24 +40,55 @@ namespace Lab_2
 
             try
             {
-                // Создание команды для построения графика
-                var command = new DrawGraphCommand(
-                    _graphManager,           // Менеджер графиков
-                    textBox1.Text,           // Выражение функции
-                    double.Parse(textBox2.Text), // Нижняя граница
-                    double.Parse(textBox3.Text)  // Верхняя граница
-                );
+                string expression = textBox1.Text;
+                double min = double.Parse(textBox2.Text);
+                double max = double.Parse(textBox3.Text);
+                string request = $"{expression}|{min}|{max}";
 
-                // Асинхронное выполнение команды построения графика
-                await command.Execute();
+                string response = await SendToServerAsync(request);
+
+                if (!string.IsNullOrEmpty(response))
+                {
+                    _graphManager.Clear();
+                    _graphManager.DrawFunction(expression, min, max);
+                    MessageBox.Show("График успешно построен!", "Успех");
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка при обработке данных на сервере.", "Ошибка");
+                }
             }
             catch (Exception ex)
             {
-                // Обработка исключений при ошибках выполнения
                 MessageBox.Show($"Ошибка: {ex.Message}");
             }
         }
 
+        private async Task<string> SendToServerAsync(string request)
+        {
+            return await Task.Run(() =>
+            {
+                try
+                {
+                    using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+                    {
+                        socket.Connect("127.0.0.1", 5000);
+
+                        byte[] data = Encoding.UTF8.GetBytes(request);
+                        socket.Send(data);
+
+                        byte[] buffer = new byte[4096];
+                        int bytesRead = socket.Receive(buffer);
+                        return Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка соединения с сервером: {ex.Message}");
+                    return string.Empty;
+                }
+            });
+        }
         private async void очиститьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var command = new ClearGraphCommand(_graphManager);

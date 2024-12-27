@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Graph_Server.props" />
+</Project>
