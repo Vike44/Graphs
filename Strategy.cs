@@ -1,7 +1,4 @@
 ﻿using org.mariuszgromada.math.mxparser;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Lab_2
 {

@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "KFm80NFD1glCOL6kT9mKcMP8Tc83zQIGL6NKMSX4O7c=",
+  "Source": "Graph_Server",
+  "BasePath": "_content/Graph_Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
